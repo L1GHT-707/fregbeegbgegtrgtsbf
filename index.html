@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:wght@400;700&family=Homemade+Apple&family=Lora:wght@400;700&family=Montserrat:wght@700&family=Space+Mono&family=Playfair+Display:wght@700&family=Titan+One&family=Pacifico&family=Anton&family=Luckiest+Guy&family=Syncopate:wght@400;700&family=Dancing+Script:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background: #FFFDD0; /* Initial Cream Background for Phase 1 */
+  font-family: 'Fredoka One', cursive;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:white;
+  text-align:center;
+  position:relative;
+  transition: background 1.5s ease;
+}
+
+.card{
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(12px);
+  padding:40px;
+  border-radius:20px;
+  max-width:480px;
+  width:72%;
+  border:2.4px solid transparent;
+  box-shadow:0 0 20px #ff4f81,0 0 40px #fffacd;
+  z-index:2;
+  animation:floatCard 3s ease-in-out infinite alternate, glow 2s ease-in-out infinite alternate;
+  position:relative;
+}
+
+.card::before{ content:"🎂"; position:absolute; top:-12px; left:-12px; font-size:1.2em; }
+.card::after{ content:"🎂"; position:absolute; top:-12px; right:-12px; font-size:1.2em; }
+
+@keyframes floatCard{ 0%{transform:translateY(0);} 100%{transform:translateY(-8px);} }
+@keyframes glow{ 0%{box-shadow:0 0 16px #ff4f81,0 0 32px #fffacd;} 100%{box-shadow:0 0 28px #ff4f81,0 0 56px #fffacd;} }
+
+h1{ font-size:2.4em; color:#fffacd; text-shadow:2.4px 2.4px 12px #ff4f81; font-family: 'Fredoka One', cursive; }
+button{ padding:12px 28px; border:none; border-radius:24px; font-size:14.4px; cursor:pointer; background:white; color:#ff4f81; margin-top:16px; font-family: 'Fredoka One', cursive; }
+button:hover{ transform:scale(1.1); background:#ffb6c1; color:white; }
+input{ padding:9.6px; border-radius:12px; border:none; margin-top:12px; font-size:12.8px; width:64%; text-align:center; outline:none; font-family: 'Fredoka One', cursive; }
+
+/* PHASE 1 SPECIFIC STYLES */
+#phase1.phase1-container { color: #708090; }
+#phase1 .card { 
+  box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700; 
+  animation: floatCard 3s ease-in-out infinite alternate, glowPhase1 2s ease-in-out infinite alternate;
+}
+#phase1 h1 { color: #708090; text-shadow: 2px 2px 8px #FFD700; font-size: 3.2em; font-family: 'Pacifico', cursive; }
+#phase1 p, #phase1 strong { color: #708090; }
+#phase1 button { background: #FFD700; color: #708090; border: 2px solid #708090; }
+#phase1 button:hover { background: #708090; color: #FFD700; }
+#phase1 input { border: 2px solid #FFD700; color: #708090; }
+
+@keyframes glowPhase1 { 0%{box-shadow:0 0 16px #FFD700,0 0 32px #FFF8DC;} 100%{box-shadow:0 0 28px #FFD700,0 0 56px #FFF8DC;} }
+
+.phase1-container{ position:relative; display:flex; justify-content:center; align-items:center; width:100%; }
+.phase1-left-container{ position:absolute; left:48px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; }
+.phase1-right-container{ position:absolute; right:48px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; }
+.phase1-img { max-width: 200px; border-radius: 12px; margin-top: 6.4px; box-shadow: 0 3.2px 8px rgba(0,0,0,0.2); }
+.slider{ position:relative; height:360px; display:flex; justify-content:center; align-items:center; gap:12px; }
+#galleryImage{ width:280px; height:280px; border-radius:12px; margin-top:16px; transition: all 1s ease-in-out; border: 4px solid white; box-shadow: 0 3.2px 8px rgba(0,0,0,0.2); object-fit: cover; }
+.side-gif{ position:absolute; top:50%; transform:translateY(-50%); z-index:1; border:none; box-shadow:none; width: auto; height: auto; }
+
+/* REDUCED GIF SIZES */
+#leftGif{left:40px;width:300px;display:none;} 
+#rightGif{right:40px;width:240px;display:none;}
+#lilyGif{left:40px;width:180px;display:none;} 
+#kinderGif{right:40px;width:240px;display:none;}
+#jawlineGif{left:40px;width:180px;display:none;} 
+#donutGif{right:40px;width:240px;display:none;}
+#tulipsGif{left:40px;width:240px;display:none;}
+#monkeyGif{right:40px;width:180px;display:none;} 
+#stitchGif{left:40px;width:240px;display:none;}
+#tangledGif{right:40px;width:180px;display:none;} 
+#shortGif{left:40px;width:240px;display:none;}
+#movieGif{right:40px;width:320px;display:none;}
+#plottingGif, #ageGif { border:none; box-shadow:none; width: 160px; height: auto; margin-top: 6.4px; }
+
+.slide-left{ animation:slideLeft 1s forwards; }
+@keyframes slideLeft{ 0%{transform:translateX(80%);opacity:0;} 100%{transform:translateX(0);opacity:1;} }
+.fade-in{ animation:fadeIn 1s forwards; }
+@keyframes fadeIn{ 0%{opacity:0;} 100%{opacity:1;} }
+
+.caption{ margin-top:14.4px; font-size:17.6px; color:#fffacd; text-shadow:1.6px 1.6px 8px #ff4f81; }
+.above-caption{ margin-bottom:9.6px; font-size:20.8px; color:#fffacd; text-shadow:1.6px 1.6px 8px #ff4f81; }
+
+/* PHASE 2 BUTTON POSITIONING */
+#galleryNext { margin-top: 35px; }
+
+.phase3-boxes{ display:grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; width:100%; height:100vh; gap:16px; padding:16px; box-sizing:border-box; }
+.phase3-box{ background:rgba(255,255,255,0.2); border-radius:12px; width:100%; height:100%; cursor:pointer; user-select:none; color:transparent; font-weight:bold; font-size:14.4px; display:flex; align-items:center; justify-content:center; transition: all 0.3s ease; font-family: 'Fredoka One', cursive; padding: 12px; overflow-y: auto; text-align: center; }
+
+/* Phase 3 Box Shadows & Hover Effects */
+.phase3-box:nth-child(1) { box-shadow: 0 0 15px rgba(230,190,255,0.2); }
+.phase3-box:nth-child(1):hover { box-shadow: 0 0 25px rgba(230,190,255,0.6); }
+
+.phase3-box:nth-child(2) { box-shadow: 0 0 15px rgba(247,231,206,0.2); }
+.phase3-box:nth-child(2):hover { box-shadow: 0 0 25px rgba(247,231,206,0.6); }
+
+.phase3-box:nth-child(3) { box-shadow: 0 0 15px rgba(152,255,152,0.2); }
+.phase3-box:nth-child(3):hover { box-shadow: 0 0 25px rgba(152,255,152,0.6); }
+
+.phase3-box:nth-child(4) { box-shadow: 0 0 15px rgba(255,127,80,0.2); }
+.phase3-box:nth-child(4):hover { box-shadow: 0 0 25px rgba(255,127,80,0.6); }
+
+.phase3-box:nth-child(5) { box-shadow: 0 0 15px rgba(255,215,0,0.2); }
+.phase3-box:nth-child(5):hover { box-shadow: 0 0 25px rgba(255,215,0,0.6); }
+
+.phase3-box:nth-child(6) { box-shadow: 0 0 15px rgba(192,192,192,0.2); }
+.phase3-box:nth-child(6):hover { box-shadow: 0 0 25px rgba(192,192,192,0.6); }
+
+.phase3-box.revealed{ background:rgba(255,255,255,0.3); user-select: auto; }
+#phase3.card { width: 100vw !important; max-width: 100vw !important; margin: 0 auto; left: 0; right: 0; }
+
+#phase4.card {
+  position: absolute; top: 0; left: 0; display: none; padding: 20px; 
+  width: 100vw !important; max-width: 100vw !important; height: 100vh !important;
+  border-radius: 0; z-index: 99; flex-direction: column; justify-content: center;
+  align-items: center; box-sizing: border-box;
+  color: #FFFFFF;
+  backdrop-filter: none;
+}
+
+#phase4 button, #phase4 p, #phase4 h1, #phase4 span { color: #FFFFFF; }
+
+.music-btn, .reset-btn { background: #98FF98; color: #8B0000; border: 4px solid white; padding: 12px 24px; font-size: 16px; box-shadow: 0 6px 14px rgba(0,0,0,0.3); transition: all 0.3s ease; margin: 4px; border-radius: 20px; }
+.music-btn { padding: 8px 16px; font-size: 12px; } /* Reduced Size */
+
+/* SONG BUTTON COLORS MATCHED TO MEMORY GAME */
+.song-num-btn { background: #98FF98; color: #8B0000; border: 3.2px solid white; padding: 8px 14px; font-size: 14px; border-radius: 50%; cursor: pointer; font-family: 'Fredoka One', cursive; transition: 0.3s; margin: 0 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.song-num-btn:hover { transform: scale(1.1); filter: brightness(1.1); }
+.song-num-btn.active { background: #FF69B4; color: white; border-color: white; box-shadow: 0 0 15px #FF69B4; }
+
+#lonelyImgInCard, #oorumImgInCard { width: 120px; height: 120px; border-radius: 16px; object-fit: cover; box-shadow: 0 3.2px 8px rgba(0,0,0,0.2); }
+#pottalaTopImg { width: 120px; height: auto; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 3.2px 8px rgba(0,0,0,0.2); }
+
+#game-container { display: none; width: 95%; max-width: 1200px; flex-direction: column; align-items: center; justify-content: center; }
+.memory-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; justify-content: center; width: 100%; max-width: 1000px; margin: 15px auto; }
+.memory-card { width: 100%; aspect-ratio: 1/1; background: #FFFDD0; border-radius: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; border: 3.2px solid #98FF98; overflow: hidden; }
+.memory-card img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.memory-card.flipped img { display: block; }
+.memory-card.flipped { background: white; transform: rotateY(180deg); transition: 0.4s; }
+.memory-card.matched { border-color: #FF69B4; box-shadow: 0 0 32px #FF69B4; border-width: 6.4px; }
+#toPhaseBalloons { font-size: 32px; padding: 20px 56px; border: 6.4px solid #98FF98; margin-top: 24px; background: #FFFDD0; color: #8B0000; }
+
+#balloonPhase { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: none; z-index: 1000; overflow: hidden; pointer-events: none; background: #2E012E; }
+.balloon { position: absolute; width: 72px; height: 88px; border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%; display: flex; align-items: center; justify-content: center; color: black; font-size: 32px; font-weight: bold; animation: floatUp 8s linear infinite; box-shadow: inset -8px -8px 12px rgba(0,0,0,0.2); font-family: 'Titan One', cursive; }
+.balloon::after { content: ''; position: absolute; bottom: -12px; width: 1.6px; height: 24px; background: white; }
+@keyframes floatUp { 0% { transform: translateY(110vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(-20vh) rotate(20deg); opacity: 1; } }
+.active-balloon { box-shadow: 0 0 20px white, inset -8px -8px 12px rgba(0,0,0,0.2); border: 4px solid white; transform: scale(1.15); }
+
+.popup-card { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); background: #1a1a1a; padding: 14.4px 14.4px 60px 14.4px; border-radius: 6.4px; box-shadow: 0 20px 48px rgba(0,0,0,0.8); z-index: 2000; text-align: center; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto; border: 0.8px solid #333; }
+.popup-card img { width: 304px; height: 304px; display: block; border: 1.6px solid #000; filter: contrast(1.15) brightness(1.05) saturate(1.1); object-fit: cover; }
+#popupImg.fit-entire { object-fit: contain; background-color: #000; }
+.popup-card p { color: #FFFDD0; margin-top: 12px; font-size: 1.12em; font-weight: bold; text-shadow: 1.6px 1.6px 4px rgba(0,0,0,0.5); }
+.popup-card button { background: #FFD700; color: #2E012E; padding: 12px 20px; margin-top: 8px; border-radius: 8px; border: none; font-family: 'Fredoka One'; cursor: pointer; }
+.popup-card.show { transform: translate(-50%, -50%) scale(1); }
+#phase5Msg { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 24px 40px; border-radius: 40px; font-size: 1.6em; z-index: 1001; pointer-events: none; opacity: 1; transition: opacity 1s ease; border: 3.2px solid #fffacd; }
+
+.card#phase5 { display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 3000; }
+.quiz-container { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(16px); padding: 32px; border-radius: 24px; border: 3.2px solid white; max-width: 640px; width: 72%; box-shadow: 0 8px 24px rgba(0,0,0,0.3); transition: all 0.5s ease; }
+.quiz-question { font-size: 1.76em; margin-bottom: 24px; color: #fffacd; text-shadow: 1.6px 1.6px 8px rgba(0,0,0,0.3); line-height: 1.2; }
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.quiz-btn { background: white; color: #ff4f81; padding: 16px; font-size: 0.88em; border-radius: 16px; transition: all 0.2s ease; border: none; cursor: pointer; font-family: 'Fredoka One'; text-transform: uppercase; }
+.quiz-btn:hover:not(:disabled) { background: #fffacd; transform: scale(1.05); }
+.quiz-btn:disabled { opacity: 0.7; cursor: default; }
+#quizFeedback { margin-top: 12px; font-size: 0.96em; color: #fffacd; font-weight: bold; height: 1.2em; }
+
+#quizLeftImg, #quizRightImg, #quizLeftImg2, #quizRightImg2, #quizLeftImg3, #quizRightImg3, #quizLeftImg4, #quizRightImg4, #quizLeftImg5, #quizRightImg5 { 
+  position: fixed; 
+  top: 50%; 
+  width: 200px; 
+  border-radius: 12px; 
+  display: none; 
+  z-index: 2999; 
+}
+#quizLeftImg, #quizLeftImg2, #quizLeftImg3, #quizLeftImg4, #quizLeftImg5 { 
+  left: 0; 
+  transform: translateY(-50%) translateX(-150%); 
+}
+#quizRightImg, #quizRightImg2, #quizRightImg3, #quizRightImg4, #quizRightImg5 { 
+  right: 0; 
+  transform: translateY(-50%) translateX(150%); 
+}
+
+/* PHASE 6 SPECIFIC STYLES */
+#phase6 {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 4000;
+  flex-direction: row; 
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  background-color: #000000;
+  color: #C0C0C0; 
+}
+#collageCard { width: 45%; height: 100vh; overflow-y: auto; margin: 0; padding: 0; border-radius: 0; background: transparent; box-shadow: none; border-right: 2px solid #2F4F4F; }
+#videoContainer { flex: 1; display: flex; flex-direction: column; height: 100vh; border-left: 2px solid #2F4F4F; }
+.video-card { flex: 1; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; position: relative; border-bottom: 2px solid #2F4F4F; cursor: pointer; }
+.collage-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.collage-container img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; transition: transform 0.3s ease, filter 0.3s ease; border: 0.5px solid #2F4F4F; }
+.collage-container img:hover { transform: scale(1.1); filter: brightness(1.3); z-index: 10; }
+#videoContainer video { max-width: 100%; max-height: 33.3vh; object-fit: contain; transform: scaleX(1.8); pointer-events: none; }
+.phase6-proceed { position: absolute; bottom: 20px; right: 20px; z-index: 4001; background: #C0C0C0; color: #000000; border: 2px solid #2F4F4F; padding: 10px 20px; border-radius: 15px; font-family: 'Roboto', sans-serif; cursor: pointer; }
+
+/* PHASE 7 SPECIFIC STYLES */
+#phase7 {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 5000;
+  flex-direction: row;
+  padding: 2vh;
+  box-sizing: border-box;
+  gap: 2vw;
+  background-color: #BB8588; 
+}
+.p7-left { width: 45%; display: flex; flex-direction: column; gap: 2vh; height: 96vh; }
+.p7-right { flex: 1; height: 96vh; }
+
+.favorite-pics-card { 
+  background: #FFFDD0; 
+  border-radius: 15px; 
+  padding: 1.5vh; 
+  border: 1px solid #D4AF37; 
+  text-align: center; 
+  height: auto; 
+  min-height: 18vh;
+  box-sizing: border-box; 
+}
+.favorite-pics-card h3 { margin:0; color:#000080; font-family: 'Homemade Apple', cursive; font-size: 0.9em; }
+
+.p7-img-container { display: flex; gap: 1vw; justify-content: center; margin-top: 1vh; height: 16vh; }
+.p7-img-container img { height: 100%; width: auto; max-width: 23%; border-radius: 8px; border: 1.5px solid #D4AF37; object-fit: cover; }
+
+.p7-video-stack { display: flex; flex-direction: column; gap: 2vh; height: 76vh; }
+.p7-vid-card { background: #FFFDD0; border-radius: 15px; border: 1px solid #D4AF37; height: auto; min-height: 10vh; max-height: 50vh; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; }
+.p7-vid-card.fit-content { height: auto !important; }
+.p7-vid-card video { width: 100%; height: auto; max-height: 100%; object-fit: contain; transform: none; background: #000; display: block; }
+.p7-text-card { width: 100%; height: 100%; background: #FFFFFF; border-radius: 20px; border: 1px solid #D4AF37; padding: 3vh; box-sizing: border-box; color: #38250E; font-family: 'Lora', serif; font-size: 1.1em; text-align: left; overflow-y: auto; }
+.p7-text-card p::after { content: ' 💙'; color: #87CEEB; }
+
+/* VIDEO MODAL */
+#p7VideoModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  z-index: 6000;
+  justify-content: center;
+  align-items: center;
+}
+#p7VideoModal video {
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="phase1-container" id="phase1">
+  <div class="phase1-left-container">
+    <img src="avlina.jpg" class="phase1-img">
+    <img src="plotting.gif" id="plottingGif">
+  </div>
+  <div class="card">
+    <h1>HAPPY BIRTHDAY TO THE PRETTIEST GIRL IN THE WORLD</h1>
+    <p><strong>PASSWORD: MS. AVLINA EVANTHIKAS BIRTHDATE (DD/MM/YY)</strong></p>
+    <input type="text" id="passwordInput">
+    <br>
+    <button onclick="checkPassword()">Unlock 🎁</button>
+    <p id="wrong" style="color:#ffcccc;"></p>
+  </div>
+  <div class="phase1-right-container">
+    <img src="avlina2.jpg" class="phase1-img">
+    <img src="age.gif" id="ageGif">
+  </div>
+</div>
+
+<div class="card" id="phase2" style="display:none">
+  <div class="slider">
+    <div>
+      <p id="aboveText" class="above-caption">LITTLE ANGEL</p>
+      <img id="galleryImage" src="">
+      <p id="imageText" class="caption"></p>
+    </div>
+  </div>
+  <button id="galleryNext" onclick="nextImage()">PROCEED ❤️</button>
+  <div id="plushiePassword" style="display:none; margin-top:20px;">
+    <p><strong id="plushieText">WHO IS AVLINA'S FAVORITE PLUSHIE?</strong></p>
+    <input type="text" id="plushieInput" placeholder="Type your answer">
+    <br>
+    <button onclick="checkPlushie()">Confirm ✅</button>
+    <p id="plushieWrong" style="color:#ffcccc;"></p>
+  </div>
+</div>
+
+<img src="border.gif" id="leftGif" class="side-gif">
+<img src="aussie.gif" id="rightGif" class="side-gif">
+<img src="lily.gif" id="lilyGif" class="side-gif">
+<img src="kinder.gif" id="kinderGif" class="side-gif">
+<img src="jawline.gif" id="jawlineGif" class="side-gif">
+<img src="donut.gif" id="donutGif" class="side-gif">
+<img src="tulips.gif" id="tulipsGif" class="side-gif">
+<img src="monkey.gif" id="monkeyGif" class="side-gif">
+<img src="stitch.gif" id="stitchGif" class="side-gif">
+<img src="tangled.gif" id="tangledGif" class="side-gif">
+<img src="short.gif" id="shortGif" class="side-gif">
+<img src="movie.gif" id="movieGif" class="side-gif">
+
+<div class="card" id="phase3" style="display:none; padding:0; border-radius:0; height:100vh;">
+  <div class="phase3-boxes">
+    <div class="phase3-box" style="grid-area: 1 / 1;" onclick="revealBox(this)"></div>
+    <div class="phase3-box" style="grid-area: 1 / 2;" onclick="revealBox(this)"></div>
+    <div class="phase3-box" style="grid-area: 1 / 3;" onclick="revealBox(this)"></div>
+    <div class="phase3-box" style="grid-area: 2 / 1;" onclick="revealBox(this)"></div>
+    <div class="phase3-box" style="grid-area: 2 / 2;" onclick="revealBox(this)"></div>
+    <div class="phase3-box" style="grid-area: 2 / 3;" onclick="revealBox(this)"></div>
+  </div>
+</div>
+
+<div class="card" id="phase4">
+  <div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+    <img src="pottala.jpg" alt="Pottala" id="pottalaTopImg">
+    <div style="display:flex; align-items:center; gap:20px; justify-content: center; width: 100%;">
+      <img src="lonely.jpg" alt="Lonely" id="lonelyImgInCard">
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="music-btn" id="musicLabel">PLAY THIS BEAUTIFUL MELODY 🎶🎶</div>
+        <div style="display:flex; justify-content:center; gap:8px;">
+          <button class="song-num-btn" id="btn1" onclick="playSong(1)">1</button>
+          <button class="song-num-btn" id="btn2" onclick="playSong(2)">2</button>
+          <button class="song-num-btn" id="btn3" onclick="playSong(3)">3</button>
+        </div>
+        <button id="resetGameBtn" class="reset-btn" onclick="setupMemoryGame()" style="display:none;">SHUFFLE AND PLAY AGAIN IF U RLLY THINK UR SMART BY CLICKING THIS BUTTON 😹😹</button>
+      </div>
+      <img src="oorum.jpg" alt="Oorum" id="oorumImgInCard">
+    </div>
+  </div>
+  <div id="game-container">
+    <div class="memory-grid" id="memoryGrid"></div>
+  </div>
+  <button id="toPhaseBalloons" style="display:none;" onclick="startBalloonPhase()">PROCEED ✨</button>
+  <audio id="birthdaySong"></audio>
+</div>
+
+<div id="balloonPhase">
+    <div id="phase5Msg">Press the letters on your keyboard to pop the balloons! 🎈</div>
+</div>
+
+<div id="popupCard" class="popup-card">
+  <img id="popupImg" src="">
+  <p id="popupCaption"></p>
+  <button id="popupButton" onclick="closePopup()">Keep Going! ❤️</button>
+</div>
+
+<div class="card" id="phase5">
+  <img src="laughing.gif" id="quizLeftImg">
+  <img src="avlina98.jpg" id="quizRightImg">
+  <img src="milk.gif" id="quizLeftImg2">
+  <img src="avlina77.jpg" id="quizRightImg2">
+  <img src="brain.gif" id="quizLeftImg3">
+  <img src="avlina99.jpg" id="quizRightImg3">
+  <img src="avlina100.jpg" id="quizLeftImg4">
+  <img src="avlina101.jpg" id="quizRightImg4">
+  <img src="avlina102.jpg" id="quizLeftImg5">
+  <img src="avlina103.jpg" id="quizRightImg5">
+
+  <div class="quiz-container" id="quizContainer">
+    <div class="quiz-question" id="quizQuestion">Loading question...</div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <p id="quizFeedback"></p>
+  </div>
+</div>
+
+<div id="phase6">
+  <div class="card" id="collageCard">
+    <div class="collage-container">
+        <img src="avlina25.jpg"> <img src="avlina26.jpg"> <img src="avlina27.jpg"> <img src="avlina28.jpg">
+        <img src="avlina29.jpg"> <img src="avlina30.jpg"> <img src="avlina31.jpg"> <img src="avlina32.jpg">
+        <img src="avlina33.jpg"> <img src="avlina34.jpg"> <img src="avlina35.jpg"> <img src="avlina36.jpg">
+        <img src="avlina37.jpg"> <img src="avlina38.jpg"> <img src="avlina39.jpg"> <img src="avlina40.jpg">
+        <img src="avlina41.jpg"> <img src="avlina42.jpg"> <img src="avlina43.jpg"> <img src="avlina44.jpg">
+        <img src="avlina45.jpg"> <img src="avlina46.jpg"> <img src="avlina47.jpg"> <img src="avlina48.jpg">
+        <img src="avlina49.jpg"> <img src="avlina50.jpg"> <img src="avlina51.jpg"> <img src="avlina52.jpg"> 
+        <img src="avlina53.jpg"> <img src="avlina54.jpg"> <img src="avlina55.jpg"> <img src="avlina56.jpg"> 
+        <img src="avlina57.jpg"> <img src="avlina58.jpg"> <img src="avlina59.jpg"> <img src="avlina60.jpg"> 
+        <img src="avlina61.jpg"> <img src="avlina62.jpg"> <img src="avlina63.jpg"> <img src="avlina64.jpg"> 
+        <img src="avlina65.jpg"> <img src="avlina66.jpg"> <img src="avlina67.jpg"> <img src="avlina68.jpg"> 
+        <img src="avlina69.jpg"> <img src="avlina70.jpg"> <img src="avlina71.jpg"> <img src="avlina72.jpg">
+        <img src="avlina81.jpg"> <img src="avlina82.jpg"> <img src="avlina83.jpg"> <img src="avlina84.jpg">
+        <img src="avlina85.jpg"> <img src="avlina86.jpg"> <img src="avlina87.jpg"> <img src="avlina88.jpg">
+        <img src="avlina89.jpg"> <img src="avlina90.jpg"> <img src="avlina91.jpg"> <img src="avlina92.jpg">
+        <img src="avlina93.jpg"> <img src="avlina94.jpg"> <img src="avlina95.jpg"> <img src="avlina97.jpg">
+    </div>
+  </div>
+  <div id="videoContainer">
+    <div class="video-card" onclick="popOutP7Vid(this)"><video src="avlina.mp4"></video></div>
+    <div class="video-card" onclick="popOutP7Vid(this)"><video src="avlina2.mp4"></video></div>
+    <div class="video-card" onclick="popOutP7Vid(this)"><video src="avlina3.mp4"></video></div>
+    <button class="phase6-proceed" onclick="startPhase7()">Proceed ✨</button>
+  </div>
+</div>
+
+<div id="phase7">
+  <div class="p7-left">
+    <div class="favorite-pics-card">
+      <h3>my favorite pictures and videos of you 💙💙💙</h3>
+      <div class="p7-img-container">
+        <img src="avlina73.jpg">
+        <img src="avlina74.jpg">
+        <img src="avlina75.jpg">
+        <img src="avlina76.jpg">
+      </div>
+    </div>
+    <div class="p7-video-stack">
+      <div class="p7-vid-card" onclick="popOutP7Vid(this)"><video src="avlina4.mp4"></video></div>
+      <div id="p7VidCard5" class="p7-vid-card fit-content" onclick="popOutP7Vid(this)"><video src="avlina5.mp4"></video></div>
+    </div>
+  </div>
+  <div class="p7-right">
+    <div class="p7-text-card">
+      <p style="margin-top:0; line-height: 1.5;">And finally, a very very happy birthday to u maccha. THIS IS LITERALLY YOUR DAY, SO MAKE SURE IT DOESN'T GO TO WASTE. One person im really thankful for is your grandmother, who heroically saved your life during your birth. I'm so so grateful to her, and also your own mother of course, who gave birth to you. They are both such wonderful human beings, truly your real life heroes. Another one of your heroes is obviously your dad, who raised you to be an amazing person. Matching fits with you is definitely something i have never seen between a dad and daughter, its a totally unique sight and it just shows how much he loves u and just how much he wants to see you happy. Your like a goodluck charm, everyone around you only become happier and enjoy life more. The way you take care of your plushies like they are real, especially chimmy, is so adorable. I cant even speak badd about chimmy without you hitting me which is very wrong okayy, u should not hit ur friend like that. Srsly i love u maccha. Even my life has significantly gotten better after u came back into my life. Had a crush on you in grade 5, and now your here again in my life out of nowhere. Every time we hanged out, it felt so special, with just your presence. Playing roblox with you, playing cards, putting makeup on my face, celebrating onam together, going to global village together, trying baskin robbins for the first time with you as well and introducing me to jamoca almond fudge ( I LOVED IT BTW) and another flavor which i do not remember sorry maccha 😅😅. going to the bootcamp together, trying SUBWAY, and i made a masterpiece with your help. Building Christmas tree with you , just for you to completely change the color theme of the ornaments dumbass. Going to silicon central, riding the little train with you, which was unexpectedly fun and i think it was fun because you were there. seeing u laugh and smile throughout the ride just made me so happy. Idk why your smile makes me smile too, its contagious and its one of the many things i love about you. The ability to make me smile, even if it is not ur intention to do so, i still end up smiling just seeing u. Playing pool together, my first time as well, and I played okayish after u taught me how to play and hold that damn stick ( deffo better than you no cap hahahahaha). Running to the theatre with you just to miss the stitch movie either way hehehe. Playing table tennis with you and u actually were destroying me suprisingly, i was shocked that you knew how to play. Talking about my favorite time i spent with u, it was definitely when we went for the bootcamp. It was overall such a fun and beautiful experience and i wish you were still here in BUDS with me and armaan, but ur ass left us the year u joined. 2025 was so dry, until May. We stared texting in May, met ur family, had so much fun with them, im very grateful to meet Tina Aunty especially, afterall we both twining. So yea, you made my year much better and im really really thankful to you. I've changed a lot after meeting you Avlina. DO TAKE GOOD CARE OF STITCH AFTER ALL HES MY BOY, GIVE HIM AS MUCH ATTENTION AS YOU GIVE TO CHIMMY. Avlina i srsly srsly love u a lot, its beyond comprehension. It all happened suddenly, and now im this deep in love with you. And i will only love u for the rest of my life. I wont love any other girl like i did for u. Ur going to be the only one in my heart. Hopefully one day we do get back together in the future when you are ready for it ofc rouse, as im always ready to give it another try. YOUR JUST SO BEAUTIFUL AND PRETTY AND ARCHER GORGEOUS AND SWEET AHHHHHH IDKK U MAKE MY HEART BEAT SO FAST. I SWEAR THE FIRST TIME WE MET I WAS SO ANXOUS AROUND YOU, DRINKING FROM THE SAME STRAW THrew me off guard. ITS MY FIRST TIME EXPERIENCING THESE FEELINGS AND IM SO GLAD IT WITH WAS YOU. LIKE WHAT THE FUCK ARE YOU EYES HOLY LORD. I CANT EVEN LOOK AT THEM FOR 5 SECS WITHOUT LOOKING AWAY BECAUSE OF HOW NERVOUSE THEY MAKE ME. YOUR EYES ARE LIKE THE OCEAN ,IT FEELS LIKE IM DROWNING AND THERE IS NO ESCAPE. MAYBE THERE IS IF I KNEW HOW TO SWIM, BUT I DONT AND IM ACTUALLY GLAD I DONT KNOW HOW TO SWIM , SINCE EVEN I WANT TO GET LOST IN THOSE EYES OF YOURS 🤭🤭. AND ONE THING I NEVER TALKED ABOUT IS YOUR SMELL. EVERYTIME WE HUGGED OR GOT REALLY CLOSE TOGETHER, YOUR SCENT JUST ATTRACTED ME SO HARD I COULDNT LET GO OF YOU. YOUR HAIR IDEK WHAT WORDS I CAN use TO DESCRIBE IT, BUT I LOVE HOLDING IT AND FEELING IT IF U GET WHAT I MEAN. AND UR LITTLE NOSE OMGG ITS SO CUTE. AND UR FITS???? THEY ARE PRETTY DIVERSE AND EVERY FIT IS SO UNIQUE IN ITSELF. ITS SO HARD TO DECIDE WHICH ONE IS MY FAVORITE SINCE I LOVE THEM ALL BUT I WOULD SAY THE BLUE SKIRT WITH THE FLOWER PRINTS ON IT, THE ONE U WORE WHEN I CAME TO CHINA CLUSTER AT THE BIRTHDAY PARTY, IM SORRY IF ITS CALLED SOMETHING ELSE AND NOT A SKIRT, BUT TO ME IT LOOKS LIKE A SKIRT HEHEHEHEHE. AND THE BELT WITH THE GOLD IN IT JUST MAKES IT SO MUCH BETTER. AND TRUST ME WHEN I SAY THIS, THE FITS ARE AMAZING, BUT WHEN U WEAR THAT FIT, U MAKE IT A THOUSAND TIMES OR EVEN A MILLION TIMES BEAUTIFUL. ITS YOUR BEAUTY ENHANCING THE FIT. HOW LUCKY YOUR FITS MUST be TO BE WOREN BY YOU. IM SORRY FOR THE YAPP BUT WHEN IT COMES TO YOU, I JUST HAVE TO YAP NON STOP. WALLAHI YOUR CLOSET IS STACKED AND BY THAT I MEAN EVERYTHING IN THERE IS JUST THAT COOL. AND THEN MY FAVORITE PYJAMAS, WITH THE WHITE T SHIRT, ONG U MAKE ME WEAK BY JUST SEEING U IN IT. THIS IS DEFINITELY MY FAVORITE COMBO, THOSE PANTS AND THEN THE WHITE SHIRT ( THE BLACK T SHIRT WITHT HE PANTS ALSO LOOK SO HOT). EARTH'S TEMPERATURE IS RISING AND ITS BECAUSE OF YOU. AND UR LIL TUMMY I LOVE TO GRAB IT HEHEHEHE. so yea maccha. idk when will be the next time get to spend times like this with you, or if i ever will have these moments in my life again. Im so so happy u were my first love and i will never ever regret my decision of confessing to u (ass confession i know). Its probably the best decision i made. These memories are stored in my heart, not my brain, because of how much i love them. and because of how much i love you. And part of this love, i want to see you succeed in life and achieve your dreams. I want to be there by your side when this does happen and i know it will. A hardworking girl like you can easily do it and maccha dont give up. Make your parents proud and show them that your their lovely daughter who is so kind and compassionate. If u really are going to become a child therapist, it is very fitting because of how much u love taking care of kids, pets too. Your personality is literally KINDNESS and u embody it perfectly. Keep pushing hard maccha and one day maybe we will end up together, i know we will, even if its after 4 or 5 years, im still gonna want you and only you. If im gonna want to marry someone its gonna be you, otherwise i wont marry at all. I LOVE U LOADS BUDDY. MAKE ME PROUD TOO I TRULY BELIEVE IN U AND UR FUTURE. SEEING U HAPPY IS THE REASON THIS HEART STILL BEATS. WANTING TO END UP WITH U IN THE FUTURE IS THE REASON THIS HEART STILL BEATS OKAY. take care and have an amazing day maccha. YOU ARE SERIOUSLY A BLESSING TO ME AND THE PEOPLE U LOVE. KEEP SHOWERING UR KINDESS UPON EVERYONE LITTLE PRINCESS. HAPPY BIRTHDAY DUMBASS 💙💙🎂🎂</p>    </div>
+  </div>
+</div>
+
+<div id="p7VideoModal" onclick="closeP7Modal()">
+    <video id="modalVideo" controls onclick="event.stopPropagation()"></video>
+</div>
+
+<script>
+const song = document.getElementById('birthdaySong');
+const musicLabel = document.getElementById('musicLabel');
+let musicStarted = false;
+let currentSongNum = null;
+
+const songLinks = {
+  1: "https://res.cloudinary.com/dgfrhnnkm/video/upload/v1772814713/lonely_uhm42e.mp3",
+  2: "https://res.cloudinary.com/dgfrhnnkm/video/upload/v1773314735/oorumblood_vizqo8.mp3", 
+  3: "https://res.cloudinary.com/dgfrhnnkm/video/upload/v1773314833/Pottala_Muttaye_kukkas.mp3"  
+};
+
+function playSong(num) {
+  // If clicking the same song that is already active
+  if (currentSongNum === num) {
+    if (song.paused) {
+      song.play();
+      musicLabel.innerText = "PAUSE THIS BEAUTIFUL MELODY ⏸️";
+    } else {
+      song.pause();
+      musicLabel.innerText = "PLAY THIS BEAUTIFUL MELODY 🎶🎶";
+    }
+    return;
+  }
+
+  // Switching to a new song
+  currentSongNum = num;
+  document.querySelectorAll('.song-num-btn').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('btn' + num).classList.add('active');
+  
+  song.src = songLinks[num];
+  song.load(); // Ensure song is loaded
+  song.play();
+  musicLabel.innerText = "PAUSE THIS BEAUTIFUL MELODY ⏸️";
+  
+  if(!musicStarted) { 
+    musicStarted = true; 
+    document.getElementById('game-container').style.display = 'flex'; 
+    document.getElementById('resetGameBtn').style.display = 'inline-block'; 
+    setupMemoryGame(); 
+  }
+}
+
+function popOutP7Vid(card) {
+  const modal = document.getElementById('p7VideoModal');
+  const modalVid = document.getElementById('modalVideo');
+  const src = card.querySelector('video').src;
+  modalVid.src = src;
+  modal.style.display = 'flex';
+  modalVid.play();
+}
+
+function closeP7Modal() {
+  const modal = document.getElementById('p7VideoModal');
+  const modalVid = document.getElementById('modalVideo');
+  modal.style.display = 'none';
+  modalVid.pause();
+  modalVid.src = "";
+}
+
+let images=["avlina3.jpg","avlina4.jpg","avlina5.jpg","avlina6.jpg","avlina7.jpg","avlina8.jpg"];
+let aboveCaptions=["LITTLE ANGEL","GROWN ANGEL","SIGMA","MONKEY","NONCHALANT TAMILIAN","DWARF"];
+let captions=["AN ANGEL WAS BORN","INTELLIGENCE REMAINED THE SAME","FLEXING HER JAWLINE OUT HERE","WOW DA WHAT A SMILE HEHEHE","TOO MUCH AURA","5'3 ASS THINKS SHES TALL"];
+let index = 0;
+
+function updateGalleryStyle(idx) {
+    const p2Card = document.getElementById("phase2");
+    const aboveText = document.getElementById("aboveText");
+    const imageText = document.getElementById("imageText");
+    const plushieText = document.getElementById("plushieText");
+    const galleryNext = document.getElementById("galleryNext");
+    
+    p2Card.style.textShadow = "none";
+    plushieText.style.color = ""; 
+
+    if (idx === 0) {
+        p2Card.style.background = "#FFF8E7"; 
+        aboveText.style.color = "#D4AF37";   
+        imageText.style.color = "#D4AF37";
+        p2Card.style.fontFamily = "'Pacifico', cursive";
+        galleryNext.style.background = "#B76E79";
+        galleryNext.style.color = "White";
+    } else if (idx === 1) {
+        p2Card.style.background = "#4682B4"; 
+        aboveText.style.color = "#00FFFF";   
+        imageText.style.color = "#00FFFF";
+        p2Card.style.fontFamily = "'Anton', sans-serif";
+        galleryNext.style.background = "#00FFFF";
+        galleryNext.style.color = "#191970";
+    } else if (idx === 2) {
+        p2Card.style.background = "#228B22"; 
+        aboveText.style.color = "#C2B280";   
+        imageText.style.color = "#C2B280";
+        p2Card.style.fontFamily = "'Playfair Display', serif";
+        galleryNext.style.background = "#C2B280";
+        galleryNext.style.color = "#3B3C36";
+    } else if (idx === 3) {
+        p2Card.style.background = "#FFA500"; 
+        aboveText.style.color = "#000080";   
+        imageText.style.color = "#000080";
+        p2Card.style.fontFamily = "'Luckiest Guy', cursive";
+        galleryNext.style.background = "#000080";
+        galleryNext.style.color = "White";
+    } else if (idx === 4) {
+        p2Card.style.background = "#191970"; 
+        aboveText.style.color = "#C0C0C0";   
+        imageText.style.color = "#C0C0C0";
+        p2Card.style.fontFamily = "'Syncopate', sans-serif";
+        galleryNext.style.background = "#C0C0C0";
+        galleryNext.style.color = "#E5E4E2";
+    } else if (idx === 5) {
+        p2Card.style.background = "#800020"; 
+        aboveText.style.color = "#FFDAB9";   
+        imageText.style.color = "#FFDAB9";
+        plushieText.style.color = "PeachPuff"; 
+        p2Card.style.fontFamily = "'Dancing Script', cursive";
+        galleryNext.style.background = "#FFDAB9";
+        galleryNext.style.color = "#FFE5B4";
+    }
+}
+
+function showFirstImage() { 
+    document.getElementById("galleryImage").src = images[0]; 
+    document.getElementById("imageText").innerText = captions[0]; 
+    document.getElementById("aboveText").innerText = aboveCaptions[0]; 
+    document.getElementById("leftGif").style.display="block"; 
+    document.getElementById("rightGif").style.display="block"; 
+    updateGalleryStyle(0);
+}
+
+function nextImage(){
+  index++; 
+  const gifIds=["leftGif","rightGif","lilyGif","kinderGif","jawlineGif","donutGif","tulipsGif","monkeyGif","stitchGif","tangledGif","shortGif","movieGif"];
+  gifIds.forEach(id => document.getElementById(id).style.display="none");
+  
+  if(index < images.length){
+    const galleryImage=document.getElementById("galleryImage");
+    galleryImage.src=images[index]; 
+    document.getElementById("imageText").innerText = captions[index]; 
+    document.getElementById("aboveText").innerText = aboveCaptions[index]; 
+    galleryImage.className="";
+    
+    updateGalleryStyle(index);
+
+    if(index==1){ document.getElementById("lilyGif").style.display="block"; document.getElementById("kinderGif").style.display="block"; } 
+    else if(index==2){ document.getElementById("jawlineGif").style.display="block"; document.getElementById("donutGif").style.display="block"; }
+    else if(index==3){ document.getElementById("tulipsGif").style.display="block"; document.getElementById("monkeyGif").style.display="block"; } 
+    else if(index==4){ document.getElementById("stitchGif").style.display="block"; document.getElementById("tangledGif").style.display="block"; } 
+    else if(index==5){ document.getElementById("shortGif").style.display="block"; document.getElementById("movieGif").style.display="block"; document.getElementById("galleryNext").style.display="none"; document.getElementById("plushiePassword").style.display="block"; }
+    if(index<=2){ galleryImage.classList.add("slide-left"); } else { galleryImage.classList.add("fade-in"); }
+  }
+}
+
+function checkPassword() { 
+  if (document.getElementById("passwordInput").value === "13/3/2008") { 
+    document.body.style.background = "#191919"; 
+    document.body.style.color = "#3D2B1F";      
+    const p2Card = document.getElementById("phase2");
+    p2Card.style.borderColor = "#E2AC33";       
+    
+    document.getElementById("phase1").style.display = "none"; 
+    p2Card.style.display = "block"; 
+    showFirstImage(); 
+  } else { 
+    document.getElementById("wrong").innerText = "Incorrect! Try again ❤️"; 
+  } 
+}
+
+function checkPlushie(){ 
+  if(document.getElementById("plushieInput").value.trim().toLowerCase() === "chimmy"){ 
+    const gifIds=["shortGif","movieGif"];
+    gifIds.forEach(id => document.getElementById(id).style.display="none");
+
+    const p2Card = document.getElementById("phase2");
+    p2Card.style.fontFamily = "'Fredoka One', cursive"; 
+    
+    document.body.style.background = "#191970"; 
+    document.body.style.color = "white"; 
+    document.getElementById("phase2").style.display = "none"; 
+    document.getElementById("phase3").style.display = "block"; 
+  } else { 
+    document.getElementById("plushieWrong").innerText = "Incorrect! Try again ❤️"; 
+  } 
+}
+
+function revealBox(box){
+  if(box.classList.contains("revealed") && box.style.gridArea !== "2 / 2") return;
+  box.classList.add("revealed");
+  if(box.style.gridArea === "1 / 1"){ 
+    box.innerText = "Many many happy returns of the day to you maccha. May god bless you with all your wishes. Also im still elder to you, so don't forget to give me that respect okayyy hehehe. HAVE AN AMAZING DAY AND HAVE LOADS OF FUN BUDDY."; 
+    box.style.color = "#BF94E4"; 
+    box.style.fontFamily = "'Luckiest Guy', cursive";
+    box.style.textShadow = "2px 2px 4px rgba(230,190,255,0.5)";
+  } 
+  else if(box.style.gridArea === "1 / 2"){ 
+    box.innerText = "YOUR PARENTS WERE BLESSED WITH A BEAUTIFUL ANGEL ON THIS DAY, THEY ARE SO LUCKY TO HAVE U IN THIS WORLD WITH THEM. HONESTLY I SEE WHY YOUR FAMILY IS ALWAYS SO HAPPY AND CHEERFUL. ITS BECAUSE THEY HAVE YOU. YOU LITERALLY BRING THEM THEIR HAPPINESS, I ALWAYS SEE THAT THEY ARE FILLED WITH JOY AND THEY BOTH ALSO WORK REALLY HARD TO MAKE SURE U LIVE AN AMAZING LIFE. KEEP PUTTING SMILES ON THE FACES OF YOUR FAMILY MACCHA. YOU ARE DOING A GREAT JOB."; 
+    box.style.color = "#F7E7CE"; 
+    box.style.fontFamily = "'Pacifico', cursive";
+    box.style.textTransform = "uppercase";
+    box.style.textShadow = "2px 2px 4px rgba(247,231,206,0.3)";
+  }
+  else if(box.style.gridArea === "1 / 3"){ 
+    box.innerText = "You know how lucky your friends are to have you in their life. Honestly tho, the way u support and motivate others is brilliant. Maybe you do know something about psychology huh. Its good to see these traits early on in life, because in the future when you do start working as a psychologist or a child therapist, these skills will help. So yea, your friends and the people u interact with are so so lucky to have you there as a model. No need to thank me for teaching u psychology okay, I'm just cool like that."; 
+    box.style.color = "#3EB489"; 
+    box.style.fontFamily = "'Montserrat', sans-serif";
+    box.style.fontWeight = "bold";
+    box.style.textShadow = "2px 2px 4px rgba(152,255,152,0.4)";
+  }
+  else if(box.style.gridArea === "2 / 1"){ 
+    box.innerText = "EVER SINCE WE BOTH MET AGAIN AFTER LIKE 7 YEARS, IM GENUINELY SUPRISED YOU STAYED THE SAME HEIGHT HAHAHAHA. LIKE SRSLY, HOW DID U BARELY GROW MACCHA. EITHER WAY, IT FEELS REALLY GOOD TO HAVE A FRIEND (AHEM AHEM) LIKE YOU, OBVIOUSLY. REALLY REALLY GLAD GOD BROUGHT US BACK TOGETHER. MEETING UR FAMILY AND HANGING OUT WITH YOU, ALL THOSE TIMES I WILL NEVER FORGET. I WILL CHERISH THESE MEMORIES WITH U. FROM PLAYING CARDS, TO YOU PUTTING MAKEUP ON MY FACE ( NO OTHER GUY WOULD LET YOU DO THIS DUMBASS ), ITS BEEN SO AMAZING. I COULDNT ASK FOR A BETTER FRIEND THAN YOU. DURING MY ATLETICS, YOU MOTIVATED ME TO WIN, AND I ACTUALLY FELT PRETTY CONFIDENT, AS IT WAS THE FIRST TIME A MODEL MOTIVATED AND PUSHED ME FORWARD. SO YEA, IM REALLY THANKFUL TO YOU MACCHA. UR AN AMAZING FRIEND. YOUR BOTH BEAUTIFUL FROM THE OUTSIDE AND FROM THE INSIDE. KEEP UP THIS ENERGY, I LOVE IT SO MUCH. IM GRATEFUL FOR EVERYTHING BROSKI."; 
+    box.style.color = "#F88379"; 
+    box.style.fontFamily = "'Dancing Script', cursive";
+    box.style.textTransform = "uppercase";
+    box.style.textShadow = "2px 2px 4px rgba(255,127,80,0.4)";
+  }
+  else if(box.style.gridArea === "2 / 2"){ 
+    if(box.innerHTML.includes("dogInput")) return; 
+    box.style.color = "#FFD700"; 
+    box.style.fontFamily = "'Orbitron', sans-serif";
+    box.style.textShadow = "2px 2px 4px rgba(255,215,0,0.6)";
+    box.innerHTML = `<div onclick="event.stopPropagation()"><p>What is Avlina's favorite dog breed?</p><input type="text" id="dogInput" placeholder="Type answer here" onclick="event.stopPropagation()"><br><button onclick="event.stopPropagation(); checkDogBreed()">Confirm ✅</button><p id="dogWrong" style="color:#ffcccc;"></p></div>`; 
+  }
+  else if(box.style.gridArea === "2 / 3"){ 
+    box.innerText = "I really admire your strength bro. After your grandpa passed away ( may he rest in peace), you stayed really strong and comforted your family while also going through all this. It shows just how mentally strong you are maccha. When your psychology marks came out and you were pretty dissapointed, instead of giving up, you stood strong and decided to much better the next time. Absolutely fantastic. And talking about your physical strength, uhhhhh, you aint all that. I beat yo ass in arm wrestling so i never want to hear you say \"oh but im stronger than you\" none of that bullshit buddy hehehe. Anyways, keep supporting yourself, your friends, the people around and most importantly, yourself."; 
+    box.style.color = "#C0C0C0"; 
+    box.style.fontFamily = "'Playfair Display', serif";
+    box.style.textShadow = "2px 2px 4px rgba(192,192,192,0.2)";
+  }
+}
+
+function checkDogBreed(){ 
+  if(document.getElementById("dogInput").value.trim().toLowerCase() === "australian shepherd"){ 
+    document.body.style.background = "#8B0000"; 
+    document.getElementById("phase3").style.display="none"; 
+    document.getElementById("phase4").style.display="flex"; 
+    triggerCelebration(); 
+  } else { 
+    document.getElementById("dogWrong").innerText = "Incorrect! Try again ❤️"; 
+  } 
+}
+
+function triggerCelebration() { const popSound = new Audio("https://www.soundjay.com/misc/sounds/party-horn-01.mp3"); popSound.volume = 0.5; popSound.play(); confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } }); }
+
+const memoryFiles = ['avlina13.jpg', 'avlina9.jpg', 'avlina78.jpg', 'avlina79.jpg', 'avlina77.jpg', 'avlina10.jpg', 'avlina11.jpg', 'avlina80.jpg'];
+let memoryItems = [...memoryFiles, ...memoryFiles];
+let flipped = []; let matchedCount = 0;
+function setupMemoryGame() { 
+  matchedCount = 0; 
+  flipped = []; 
+  document.getElementById('toPhaseBalloons').style.display = 'none'; 
+  const grid = document.getElementById('memoryGrid'); 
+  memoryItems.sort(() => 0.5 - Math.random()); 
+  grid.innerHTML = ''; 
+  memoryItems.forEach((file) => { 
+    const card = document.createElement('div'); 
+    card.className = 'memory-card'; 
+    card.dataset.val = file; 
+    card.innerHTML = `<img src="${file}">`; 
+    card.onclick = () => flipCard(card); 
+    grid.appendChild(card); 
+  }); 
+}
+
+function flipCard(card) { if(flipped.length < 2 && !card.classList.contains('flipped')) { card.classList.add('flipped'); flipped.push(card); if(flipped.length === 2) setTimeout(checkMatch, 800); } }
+function checkMatch() { 
+  if(flipped[0].dataset.val === flipped[1].dataset.val) { 
+    flipped[0].classList.add('matched'); 
+    flipped[1].classList.add('matched'); 
+    matchedCount++; 
+    if(matchedCount === 8) { 
+      document.getElementById('toPhaseBalloons').style.display = 'inline-block'; 
+      confetti({ particleCount: 300, spread: 100, origin: { y: 0.6 } }); 
+    } 
+  } else { 
+    flipped[0].classList.remove('flipped'); 
+    flipped[1].classList.remove('flipped'); 
+  } 
+  flipped = []; 
+}
+
+const nameSequence = "AVLINATHOMAS".split("");
+const balloonDetails = [
+  { img: 'avlina14.jpg', cap: 'A FOR ATTRACTIVE', btn: 'YES IM THE MOST ATTRACTIVE GIRL IN THE WORLD', color: '#D4AF37' },
+  { img: 'avlina12.jpg', cap: 'V FOR VIBRANT', btn: 'IM JUST COOL LIKE THAT', color: '#B0C4DE' },
+  { img: 'avlina15.jpg', cap: 'L FOR LOOSU', btn: 'IM THE BIGGEST LOOSU', isLoosu: true, color: '#DC143C' },
+  { img: 'avlina16.jpg', cap: 'I FOR INNOVATIVE', btn: 'CREATIVITY RUNS IN THE BLOOD BRO', color: '#50C878' },
+  { img: 'avlina17.jpg', cap: 'N FOR NONCHALANT', btn: 'THATS ME 🤙', color: '#082567' },
+  { img: 'avlina18.jpg', cap: 'A FOR ADORABLE', btn: 'AWWWWWWWWWWW', color: '#F7E7CE' },
+  { img: 'avlina19.jpg', cap: 'T FOR TUFF', btn: 'JUST SIGMA LIKE THAT MACCHA', color: '#B87333' },
+  { img: 'avlina20.jpg', cap: 'H FOR HARDWORKING', btn: 'NEVER GIVE UP 👍', color: '#C4006B' },
+  { img: 'avlina21.jpg', cap: 'O FOR OPTIMISTIC', btn: 'POSITIVITY IS MY THING', color: '#E08D3C' },
+  { img: 'avlina22.jpg', cap: 'M FOR MONKEY', btn: '🐒', color: '#40E0D0' },
+  { img: 'avlina23.jpg', cap: 'A FOR AWESOME', btn: 'UR JUST AWESOME', color: '#F8B9D4' },
+  { img: 'avlina24.jpg', cap: 'S FOR SLEEPYHEAD', btn: 'NO UR NOT SMART NOR STRONG 😜', color: '#F0F8FF' }
+];
+let currentPopIndex = 0;
+function startBalloonPhase() { 
+  if(song) { song.pause(); song.currentTime = 0; } 
+  document.getElementById('phase4').style.display = 'none'; 
+  document.getElementById('balloonPhase').style.display = 'block'; 
+  document.body.style.background = "#2E012E"; 
+  setTimeout(() => { const msg = document.getElementById('phase5Msg'); if(msg) msg.style.opacity = '0'; }, 4000); 
+  nameSequence.forEach((letter, i) => { createBalloon(letter, i); }); 
+  window.addEventListener('keydown', handlePop); 
+  updateActiveBalloon(); 
+}
+function createBalloon(letter, index) { 
+  const b = document.createElement('div'); 
+  b.className = 'balloon'; 
+  b.id = 'balloon-' + index; 
+  b.innerText = letter; 
+  b.style.backgroundColor = balloonDetails[index].color; 
+  b.style.left = (3 + (index * 8)) + 'vw'; 
+  b.style.animationDelay = (index * 0.4) + 's'; 
+  document.getElementById('balloonPhase').appendChild(b); 
+}
+function updateActiveBalloon() { document.querySelectorAll('.balloon').forEach(b => b.classList.remove('active-balloon')); const active = document.getElementById('balloon-' + currentPopIndex); if(active) active.classList.add('active-balloon'); }
+function handlePop(e) { const key = e.key.toUpperCase(); if (key === nameSequence[currentPopIndex]) { const b = document.getElementById('balloon-' + currentPopIndex); if (b && b.style.display !== 'none') { b.style.display = 'none'; showPopup(balloonDetails[currentPopIndex]); new Audio('https://www.soundjay.com/misc/sounds/balloon-pop-1.mp3').play(); currentPopIndex++; updateActiveBalloon(); } } }
+function showPopup(data) { const popup = document.getElementById('popupCard'); document.getElementById('popupImg').src = data.img; if (data.isLoosu) document.getElementById('popupImg').classList.add('fit-entire'); else document.getElementById('popupImg').classList.remove('fit-entire'); document.getElementById('popupCaption').innerText = data.cap; document.getElementById('popupButton').innerText = data.btn; popup.classList.add('show'); }
+function closePopup() { document.getElementById('popupCard').classList.remove('show'); if (currentPopIndex === nameSequence.length) startPhase5(); }
+
+let quizIndex = 0;
+const quizData = [
+    { question: "Lanston's height is 6'6?", options: ["TRUE", "TRUE", "TRUE", "TRUE"], answer: "any", cardBg: "#FAF9F6", textColor: "#4B0082", font: "'Montserrat', sans-serif" },
+    { question: "WHO IS BETTER AT PSYCHOLOGY, AVLINA OR LANSTON?", options: ["LANSTON", "YES ME, AVLINA", "NEITHER, BOTH SUCK AT PSYCHOLOGY", "BOTH ARE EQUALLY GOOD"], answer: "YES ME, AVLINA", cardBg: "#FFFF00", textColor: "#000080", font: "'Fredoka One', cursive" },
+    { question: "Who is the cutest?", options: ["OFCC MY BABY CHIMMY", "ABSOLUTELY MY BABY SELF", "TOTALLY NOT STITCH", "MYSELF"], answer: "ABSOLUTELY MY BABY SELF", cardBg: "#98FF98", textColor: "#333333", font: "'Space Mono', monospace" },
+    { question: "IM ALWAYS RIGHT", options: ["TRUE", "VERY VERY TRUE", "NO TINA AUNTY AND LANSTON ARE ALWAYS RIGHT", "FALSE"], answer: ["TRUE", "VERY VERY TRUE"], cardBg: "#FF66CC", textColor: "#FFFFFF", font: "'Playfair Display', serif" },
+    { question: "AM I THE PRETTIEST GIRL IN THE WORLD???", options: ["YES", "YES", "YES", "YES", "YES", "YES", "YES", "YES"], answer: "any", cardBg: "rgba(255, 255, 255, 0.15)", textColor: "#fffacd", font: "'Fredoka One', cursive" }
+];
+
+function startPhase5() { 
+  document.getElementById('balloonPhase').style.display = 'none'; 
+  document.getElementById('phase5').style.display = 'flex'; 
+  document.body.style.background = "#2C3E50"; 
+  renderQuiz(); 
+}
+
+function renderQuiz() { 
+  const currentQuiz = quizData[quizIndex]; 
+  const container = document.getElementById('quizContainer');
+  const questionText = document.getElementById('quizQuestion');
+  const optionsDiv = document.getElementById('quizOptions');
+  const feedback = document.getElementById('quizFeedback');
+  
+  const lImg1 = document.getElementById('quizLeftImg'); const rImg1 = document.getElementById('quizRightImg');
+  const lImg2 = document.getElementById('quizLeftImg2'); const rImg2 = document.getElementById('quizRightImg2');
+  const lImg3 = document.getElementById('quizLeftImg3'); const rImg3 = document.getElementById('quizRightImg3');
+  const lImg4 = document.getElementById('quizLeftImg4'); const rImg4 = document.getElementById('quizRightImg4');
+  const lImg5 = document.getElementById('quizLeftImg5'); const rImg5 = document.getElementById('quizRightImg5');
+
+  lImg1.style.display = (quizIndex === 0) ? 'block' : 'none';
+  rImg1.style.display = (quizIndex === 0) ? 'block' : 'none';
+  lImg2.style.display = (quizIndex === 1) ? 'block' : 'none';
+  rImg2.style.display = (quizIndex === 1) ? 'block' : 'none';
+  lImg3.style.display = (quizIndex === 2) ? 'block' : 'none';
+  rImg3.style.display = (quizIndex === 2) ? 'block' : 'none';
+  lImg4.style.display = (quizIndex === 3) ? 'block' : 'none';
+  rImg4.style.display = (quizIndex === 3) ? 'block' : 'none';
+  lImg5.style.display = (quizIndex === 4) ? 'block' : 'none';
+  rImg5.style.display = (quizIndex === 4) ? 'block' : 'none';
+
+  container.style.backgroundColor = currentQuiz.cardBg;
+  container.style.fontFamily = currentQuiz.font;
+  questionText.style.color = currentQuiz.textColor;
+  questionText.style.fontFamily = currentQuiz.font;
+  questionText.style.textShadow = "none"; 
+
+  questionText.innerText = currentQuiz.question;
+  optionsDiv.style.pointerEvents = 'auto'; 
+  optionsDiv.innerHTML = ''; 
+  feedback.innerText = ''; 
+  feedback.style.color = currentQuiz.textColor;
+
+  currentQuiz.options.forEach(opt => { 
+    const btn = document.createElement('button'); 
+    btn.className = 'quiz-btn'; 
+    btn.innerText = opt; 
+    btn.style.fontFamily = currentQuiz.font;
+    btn.onclick = () => checkQuizAnswer(opt); 
+    optionsDiv.appendChild(btn); 
+  }); 
+}
+
+function checkQuizAnswer(selected) { 
+  const currentQuiz = quizData[quizIndex]; 
+  const optionsDiv = document.getElementById('quizOptions');
+  let isCorrect = Array.isArray(currentQuiz.answer) ? currentQuiz.answer.includes(selected) : (currentQuiz.answer === "any" || selected === currentQuiz.answer); 
+  
+  if (isCorrect) { 
+    optionsDiv.style.pointerEvents = 'none'; 
+    Array.from(optionsDiv.children).forEach(btn => btn.disabled = true);
+    
+    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } }); 
+    setTimeout(() => { 
+      quizIndex++; 
+      if (quizIndex < quizData.length) renderQuiz(); 
+      else startPhase6(); 
+    }, 2000); 
+  } else { 
+    document.getElementById('quizFeedback').innerText = "WRONG! Try again ❤️"; 
+  } 
+}
+
+function startPhase6() { 
+  document.getElementById('phase5').style.display = 'none'; 
+  document.getElementById('phase6').style.display = 'flex'; 
+  document.body.style.background = "#000000"; 
+}
+
+function startPhase7() {
+  document.getElementById('phase6').style.display = 'none';
+  document.getElementById('phase7').style.display = 'flex';
+  document.body.style.background = "#BB8588";
+  confetti({ particleCount: 400, spread: 120, origin: { y: 0.5 } });
+}
+</script>
+</body>
+</html>
